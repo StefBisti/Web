@@ -1,0 +1,52 @@
+body {
+    overflow: hidden;
+    font-family: Futura;
+    background-color: rgb(51, 51, 51);
+}
+
+@font-face {
+    font-family: Futura;
+    src: url("Futura Heavy font.ttf");
+}
+
+div.container {
+    width: 90vw;
+    height: 90vh;
+    border: 5px solid blue;
+
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+
+    display: flex;
+}
+
+img.clock {
+    height: 100%;
+    margin: auto;
+}
+
+div.clockArrow{
+    position: absolute;
+    top: 50%;
+    left: 50.15%;
+    transform: translate(-50%, 0);
+    transform-origin: top;
+}
+
+#hourArrow{
+    width: 20px;
+    height: 150px;
+    background-color: rgb(255, 255, 255);
+}
+#minuteArrow{
+    width: 15px;
+    height: 175px;
+    background-color: rgb(216, 216, 216);
+}
+#secondArrow{
+    width: 10px;
+    height: 200px;
+    background-color: rgb(235, 0, 0);
+}

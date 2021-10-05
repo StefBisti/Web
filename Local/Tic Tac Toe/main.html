@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Tic-Tac-Toe</title>
+        <link rel="stylesheet" href="style.css">
+    </head>
+
+    <body>
+        <div class="gradient"></div>
+        <div class="mainContainer">
+            <div id="c1" onclick='placeXorO(0, 0, "c1")' class="container" style="border-left: none;border-top:none"></div>
+            <div id="c2" onclick='placeXorO(0, 1, "c2")' class="container" style="border-top:none"></div>
+            <div id="c3" onclick='placeXorO(0, 2, "c3")' class="container" style="border-top:none; border-right: none;"></div>
+            <div id="c4" onclick='placeXorO(1, 0, "c4")' class="container" style="border-left: none;"></div>
+            <div id="c5" onclick='placeXorO(1, 1, "c5")' class="container"></div>
+            <div id="c6" onclick='placeXorO(1, 2, "c6")' class="container" style="border-right: none;"></div>
+            <div id="c7" onclick='placeXorO(2, 0, "c7")' class="container" style="border-bottom:none; border-left: none;"></div>
+            <div id="c8" onclick='placeXorO(2, 1, "c8")' class="container" style="border-bottom:none;"></div>     
+            <div id="c9" onclick='placeXorO(2, 2, "c9")' class="container" style="border-bottom:none; border-right: none;"></div>
+        
+            <div id="gameEndedPanel" class="gameEndedPanel" hidden>
+                <p class="gameEndedPanelText">Game Over</p>
+                <p id="gameEndedPanelText" class="gameEndedPanelText" style="font-size: 60px;color: rgb(65, 65, 65);">Player X won!</p>
+                <button class="gameEndedPanelButton" onclick="location.reload()">Play again</button>
+            </div>
+        </div>
+
+        <script src="code.js"></script>
+    </body>
+</html>

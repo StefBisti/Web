@@ -1,0 +1,137 @@
+body{
+    background-color: rgb(49, 49, 49);
+    margin: 0px;
+    padding: 0px;
+    font-family: Futura;
+}
+@font-face{
+    font-family: Futura;
+    src: url("Futura Heavy font.ttf");
+}
+
+
+.guessingContainer{
+    display: flex;
+    width: 90%;
+    /* border: 5px solid yellow; */
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    margin: auto;
+}
+.RGBContainer{
+    width: 100%;
+}
+
+.guessedColor{
+    background-color: rgb(238, 238, 238);
+    border-radius: 30px;
+    height: 250px;
+    width: 250px;
+    margin-right: 40px;
+    flex-shrink: 0;
+}
+
+.givenColor{
+    width: 100%;
+    height: 180px;
+    background-color: rgb(238, 238, 238);
+    margin-bottom: 60px;
+}
+
+.sliderContainer{
+    display: flex;
+    width: 100%;
+    margin-bottom: 15px;
+    margin-top: 15px;
+}
+.slider{
+    flex: 1;
+    margin: auto;
+    margin-top: 11px;
+    height: 15px;
+    border-radius: 7.5px;
+    outline: none;
+    transition: background 450ms ease-in;
+    -webkit-appearance: none;
+    background: linear-gradient(to right, #82CFD0 1%, #82CFD0 0%, #fff 0%, #fff 100%);
+}
+.slider::-webkit-slider-thumb{
+    appearance: none;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%; 
+    background: #04AA6D;
+    cursor: pointer;
+    border: 3px solid rgba(0, 0, 0, 0.26);
+}
+#redSlider::-webkit-slider-thumb{
+    background: rgb(255, 0, 0) !important;
+}
+#greenSlider::-webkit-slider-thumb{
+    background: rgb(0, 255, 0) !important;
+}
+#blueSlider::-webkit-slider-thumb{
+    background: rgb(0, 0, 255) !important;
+}
+
+h1{
+    position: relative;
+    margin: auto;
+    margin-left: 15px;
+    width: 100px;
+    user-select: none;
+    text-align: left;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    font-size: 30px;
+    white-space: nowrap; 
+    overflow: hidden;
+    padding-right: 20px;
+    margin-right: -20px;
+}
+
+h2{
+    position: relative;
+    margin: auto;
+    user-select: none;
+    text-align: center;
+    color: whitesmoke;
+    font-size: 50px;
+    margin-top: 40px;
+    margin-bottom: -20px;
+    white-space: pre;
+}
+
+p.givenColorText{
+    text-align: center;
+    position: relative;
+    top: 50%;
+    transform: translate(0, -50%);
+    color: whitesmoke;
+    font-size: 50px;
+    margin: auto;
+    user-select: none;
+}
+
+button.guess{
+    width: 250px;
+    background-color: #f5f5f5;
+    border: none;
+    color: rgb(51, 51, 51);
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    font-size: 25px;
+    font-family: Futura;
+
+    margin-top: 40px;
+    position: relative;
+    left: 50%;
+    transform: translate(-50%, 0);
+}
+button.guess:hover{
+    background-color: #dbdbdb;
+}
+button.guess:active{
+    background-color: #b4b4b4;
+}

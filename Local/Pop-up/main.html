@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Pop-up</title>
+        <link rel="stylesheet" href="style.css">
+    </head>
+
+    <body>
+        <div style="visibility: hidden;" class="backgroundCover" id="backgroundCover">
+            <div class="popUp">
+                <p class="popUpText" style="font-size: 30px;color: rgb(224, 6, 6);">This is a pop-up</p>
+                <p class="popUpText" style="font-size: 30px;color: rgb(51, 51, 51);">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed felis tortor, dictum eget nisl vel, consequat malesuada augue.</p>
+                <div class="exitPopUp" onclick="ExitPopUp()"><p class="exitPopUpText">&times;</p></div>
+            </div> 
+        </div>
+        <button onclick="ShowPopUp()">Click me</button>
+        
+        <script src="code.js"></script>
+    </body>
+</html>

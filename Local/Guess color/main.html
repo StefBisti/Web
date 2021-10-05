@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Guess color</title>
+        <link rel="stylesheet" href="style.css">
+    </head>
+
+    <body>
+        <h2 id="guessText">Guess the color!</h2>
+        <br><br><br>
+        <div class="givenColor" id="givenColor">
+            <p class="givenColorText" id="givenColorText"></p>
+        </div>
+
+        <div class="guessingContainer">
+            <div class="guessedColor" id="guessedColor"></div>
+
+            <div class="RGBContainer">
+                <div class="sliderContainer">
+                    <input type="range" min="0" max="255" value="0" class="slider" id="redSlider">
+                    <h1 style="color: rgb(255, 0, 0);" id="redText">R: 0</h1>
+                </div>
+
+                <div class="sliderContainer">
+                    <input type="range" min="0" max="255" value="0" class="slider" id="greenSlider">
+                    <h1 style="color: rgb(0, 255, 0);" id="greenText">G: 0</h1>
+                </div>
+
+                <div class="sliderContainer">
+                    <input type="range" min="0" max="255" value="0" class="slider" id="blueSlider">
+                    <h1 style="color: rgb(0, 0, 255);" id="blueText">B: 0</h1>
+                </div>
+            </div>
+        </div>
+
+        <button class="guess" onclick="Guess()" id="guessButton">Guess color</button>
+       
+        
+        <script src="code.js"></script>
+    </body>
+</html>

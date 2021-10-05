@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Calculator</title>
+        <link rel="stylesheet" href="style.css">
+    </head>
+
+    <body>
+        <div class="calculatorUI">
+            <div class="holder">
+                <div class="container" id="result"><h1 id="resultText"></h1></div>
+                <div class="container operation" id="+" onclick="GetOperationToDo('+')"><h2 style="top: -87%;">+</h2></div>
+                <div class="container operation" id="-" onclick="GetOperationToDo('-')"><h2 style="top: -92%;">-</h2></div>
+                <div class="container operation" id="*" onclick="GetOperationToDo('*')"><h2 style="top: -87%;">&times;</h2></div>
+                <div class="container operation" id="/" onclick="GetOperationToDo('/')"><h2 style="top: -87%;">&divide;</h2></div>
+                <div class="container normal" onclick="AddDigitToNumber('1')"><h2>1</h2></div>
+                <div class="container normal" onclick="AddDigitToNumber('2')"><h2>2</h2></div>
+                <div class="container normal" onclick="AddDigitToNumber('3')"><h2>3</h2></div>
+                <div class="container normal" id="equals" onclick="DoOperation()"><h2 style="top: 20.5%;">=</h2></div>
+                <div class="container normal" onclick="AddDigitToNumber('4')"><h2>4</h2></div>
+                <div class="container normal" onclick="AddDigitToNumber('5')"><h2>5</h2></div>
+                <div class="container normal" onclick="AddDigitToNumber('6')"><h2>6</h2></div>
+                <div class="container normal" onclick="AddDigitToNumber('7')"><h2>7</h2></div>
+                <div class="container normal" onclick="AddDigitToNumber('8')"><h2>8</h2></div>
+                <div class="container normal" onclick="AddDigitToNumber('9')"><h2>9</h2></div>
+                <div class="container normal" onclick="AddDigitToNumber('0')"><h2>0</h2></div>
+                <div class="container normal" onclick="AddDigitToNumber('.')"><h2>.</h2></div>
+                <div class="container normal" onclick="DeleteEverything()"><h2>C</h2></div>
+            </div>
+        </div>
+        
+        <script src="code.js"></script>
+    </body>
+</html>
