@@ -1,12 +1,12 @@
 ServerHost/.classpath
-ServerHost/.gitignore
 ServerHost/.project
 ServerHost/.settings/
 .classpath
 .project
 .settings/
-ServerHost/Blogs-loginProject/.settings
-ServerHost/Blogs-loginProject/build
-ServerHost/Blogs-loginProject/.classpath
-ServerHost/Blogs-loginProject/.project
+
+Blogs-loginProject/.settings
+Blogs-loginProject/build
+Blogs-loginProject/.classpath
+Blogs-loginProject/.project
 
