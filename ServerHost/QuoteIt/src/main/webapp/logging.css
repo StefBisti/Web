@@ -1,0 +1,115 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;500;700;900&display=swap');
+
+body {
+	background-color: rgb(240, 240, 240);
+	margin: auto;
+	font-family: 'Roboto', sans-serif;
+}
+
+div.header {
+	width: 100%;
+	height: clamp(40px, 7vh, 100px);
+	background-color: white;
+	border-bottom: 1px solid rgb(200, 200, 200);
+	position: fixed;
+	z-index: 1;
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+}
+div.header a {
+	text-decoration: none;
+	padding: 0px 5vw;
+	-webkit-tap-highlight-color:  rgba(255, 255, 255, 0); 
+	font-size: clamp(27px, 4vh, 50px);
+	color: rgb(50, 50, 50);
+	font-weight: 900;
+}
+div.header a:hover {
+	color: rgb(0, 0, 0);
+}
+
+
+div.login-signup-container {
+	background-color: white;
+	width: min(800px, 100vw);
+	position: absolute;
+	top: 54%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	box-shadow: 0 0 60px 3px rgba(0, 0, 0, 0.1);
+}
+div.login-signup-container p.title {
+	font-size: clamp(30px, 6vh, 90px);
+	font-weight: 300;
+	color: rgb(50, 50, 50);
+	text-align: left;
+	margin: 0 auto;
+	text-align: center;
+	margin-top: clamp(30px, 5vh, 100px);
+	margin-bottom: clamp(35px, 6vh, 100px);
+}
+
+div.login-signup-container input {
+	width: calc(min(800px, 100vw) - 220px);
+	height: clamp(50px, 3.4vh, 60px);
+	font-size: 30px;
+	font-weight: 500;
+	margin-left: 100px;
+	margin-right: 0;
+	padding-left: 10px;
+	background-color: rgb(245, 245, 245);
+	border: 2px solid rgb(0, 128, 255);
+	border-radius: 10px;
+	outline: none;
+}
+div.login-signup-container div.fieldTitle {
+	font-size: clamp(25px, 3vh, 35px);
+	font-weight: 700;
+	margin-left: 100px;
+	margin-bottom: 10px;
+}
+div.login-signup-container p.fieldError {
+	visibility: hidden;
+	font-size: clamp(15px, 2vh, 25px);
+	font-weight: 500;
+	margin-left: 100px;
+	margin-bottom: 40px;
+	margin-top: 8px;
+	color: red;
+}
+div.login-signup-container button.submitButton {
+	font-size: clamp(30px, 3.2vh, 40px);
+	font-weight: 300;
+	background-color: rgb(0, 128, 255);
+	border: none;
+	border-radius: 6px;
+	display: table;
+	margin: auto auto;
+	margin-bottom: 30px;
+	margin-top: clamp(30px, 5vh, 50px);
+	padding: clamp(10px, 1.5vh, 20px) clamp(50px, 5.5vh, 60px);
+	color: white;
+}
+
+div.login-signup-container button.submitButton:hover {
+	background-color: rgb(6, 118, 228);
+}
+div.login-signup-container button.submitButton:active {
+	background-color: rgb(7 101 195);
+}
+
+div.login-signup-container div.register {
+	text-align: center;
+	margin-bottom: 60px;
+	margin-top: 40px;
+}
+div.register a{
+	text-decoration: none;
+	color: rgb(0, 128, 255);
+	font-size: clamp(20px, 2vh, 30px);
+	-webkit-tap-highlight-color:  rgba(255, 255, 255, 0);
+}
+div.register a:hover{
+	color: rgb(7 101 195);
+}
