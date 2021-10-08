@@ -144,7 +144,6 @@ div.quote div.heartHolder {
 	position: relative;
 	display: flex;
 	flex-direction: column;
-	
 	border-radius: clamp(10px, 1.5vw, 15px) 0px 0px clamp(10px, 1.5vw, 15px);
 }
 div.heartHolder img.heart {
@@ -166,7 +165,6 @@ div.heartHolder div.heartsNumber {
 }
 
 div.loginToSeeThis {
-	top: clamp(80px, 16vh, 190px);
 	position: relative;
 	font-size: clamp(20px, 4vw, 40px);
 	color: rgb(140, 140, 140);

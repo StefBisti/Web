@@ -3,7 +3,7 @@
 
 
 const Login = () => {
-	let username = $('#username').val().replace("'", "''");
+	let username = $('#usernameWR56YyOp0').val().replace("'", "''");
 	let password = $('#password').val().replace("'", "''");
 	
 	$('#passwordProblem').css('visibility', 'hidden');

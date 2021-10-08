@@ -30,13 +30,17 @@ public class GetQuotes_HomeServlet extends HttpServlet{
 		ArrayList<ArrayList<String>> bestQuotes = GetBestQuotes();
 		ArrayList<ArrayList<String>> newQuotes = GetNewQuotes();
 		ArrayList<ArrayList<String>> myQuotes = null;
+		ArrayList<Integer> likedQuotes = null;
 		
-		if(userID != -1)
+		if(userID != -1) {
 			myQuotes = GetMyQuotes(userID);
+			likedQuotes = GetLikedQuotes(userID);
+		}
 		
 		session.setAttribute("bestQuotes", bestQuotes);
 		session.setAttribute("newQuotes", newQuotes);
 		session.setAttribute("myQuotes", myQuotes);
+		session.setAttribute("likedQuotes", likedQuotes);
 		
 		Date date = new Date();
 		SimpleDateFormat dateFormat = new SimpleDateFormat("dd MMMM Y");
@@ -44,6 +48,26 @@ public class GetQuotes_HomeServlet extends HttpServlet{
 		
 		request.getRequestDispatcher("home.jsp").forward(request, response);
 	}	
+	
+	static ArrayList<Integer> GetLikedQuotes(int userID) {
+		ArrayList<Integer> likedQuotes = new ArrayList<Integer>();
+		
+		try {
+			Class.forName("com.mysql.cj.jdbc.Driver");
+			Connection myConnection = DriverManager.getConnection("jdbc:mysql://localhost:3306/quoteit", "Stefan", "@T3f!,");
+			Statement myStatement = myConnection.createStatement();
+			ResultSet myResultSet = myStatement.executeQuery("SELECT quoteID FROM likes WHERE userID = '" + userID + "'");
+			
+			while(myResultSet.next()) {	
+				likedQuotes.add(myResultSet.getInt("quoteID"));
+			}
+			
+		} catch (Exception e) {
+			return null;
+		}
+		return likedQuotes;
+	}
+	
 	static ArrayList<ArrayList<String>> GetBestQuotes() {
 		ArrayList<ArrayList<String>> quotesArray = new ArrayList<ArrayList<String>>();
 		try {

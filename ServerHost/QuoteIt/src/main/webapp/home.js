@@ -32,36 +32,80 @@ const PostQuote = () => {
 	}, () => {
 		location.reload();
 	});
-}
+};
+
+const Like = (element) => {
+	let quoteID = element.parentElement.id;
+	
+	$(`[id=${quoteID}]`).each((ind, obj) => {
+		console.log(obj);
+		obj.children[0].classList.add('liked');
+		let currentLikes = parseInt(obj.children[0].children[1].innerHTML);
+		obj.children[0].children[1].innerHTML = currentLikes + 1;
+	});
+	
+	
+	
+	
+	$.get('LikeQuote_HomeServlet', {
+		quoteID: quoteID
+	});
+};
+
+const Unlike = (element) => {
+	let quoteID = element.parentElement.id;
+	
+	
+	$(`[id=${quoteID}]`).each((ind, obj) => {
+		console.log(obj);
+		obj.children[0].classList.remove('liked');
+		let currentLikes = parseInt(obj.children[0].children[1].innerHTML);
+		obj.children[0].children[1].innerHTML = currentLikes - 1;
+	});
+	
+	
+	
+	$.get('UnlikeQuote_HomeServlet', {
+		quoteID: quoteID
+	}, (response) => {
+		
+	});
+	
+	
+	// de pus response
+};
 
 const ChangeLikeButton = (element, query) => {
 	switch(query){
 		case 'highlight':
-			if(!$(element).parent().hasClass('liked'))
-				$(element).parent().addClass('highlighted');
+			if(!$(element).hasClass('liked'))
+				$(element).addClass('highlighted');
 			break;
 		case 'unhighlight':
-			if(!$(element).parent().hasClass('liked'))
-				$(element).parent().removeClass('highlighted');				
+			if(!$(element).hasClass('liked'))
+				$(element).removeClass('highlighted');				
 			break;
 		case 'like':
-			if(!$(element).parent().hasClass('liked')){
-				$(element).parent().addClass('liked');
-				$(element).parent().removeClass('highlighted');
+			if(!$(element).hasClass('liked')){
+				$(element).addClass('liked');
+				$(element).removeClass('highlighted');
+				Like(element);
 			}
 			else {
-				$(element).parent().removeClass('liked');
+				$(element).removeClass('liked');
+				Unlike(element);
 			}	
 			break;	
 	}
 }
 
-$(document).ready(function() {
+
+
+$(document).ready(() => {
 	if(document.getElementById('quoteInput') != null) {
 		$('#quoteInput').css('height', 'auto');
 		$('#quoteInput').css('height', (document.getElementById('quoteInput').scrollHeight) + 'px');
 	}
-	
 	
 	$('#quoteInput').on('input', () => {
 		if(document.getElementById('quoteInput') != null) {

@@ -5,8 +5,6 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.Statement;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -14,32 +12,32 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-@WebServlet("/PostQuote_HomeServlet")
-public class PostQuote_HomeServlet extends HttpServlet{
 
-	private static final long serialVersionUID = -1882529755686175430L;
+@WebServlet("/LikeQuote_HomeServlet")
+public class LikeQuote_HomeServlet extends HttpServlet{
 
+	private static final long serialVersionUID = 7618102215734849395L;
+	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) {
-		
 		HttpSession session = request.getSession();
-		
 		int userID = (int) session.getAttribute("userID");
-		String content = request.getParameter("content");
-		String author = request.getParameter("author");
-		String username = (String) session.getAttribute("username");
-		
-		Date date = new Date();
-		SimpleDateFormat dateFormat = new SimpleDateFormat("YYYY-MM-dd");
-		String todaysDate = dateFormat.format(date);
+		int quoteID = Integer.parseInt(request.getParameter("quoteID"));
 		
 		try {	
 			Class.forName("com.mysql.cj.jdbc.Driver");
 			Connection myConnection = DriverManager.getConnection("jdbc:mysql://localhost:3306/quoteit", "Stefan", "@T3f!,");
 			Statement myStatement = myConnection.createStatement();
-			myStatement.executeUpdate("INSERT INTO quotes (userID, content, realAuthor, userAuthor, likes, date) VALUES ('" + userID + "', '" + content + "', '" + author + "', '" + username + "', '" + 0 + "', '" + todaysDate + "')");
+			myStatement.executeUpdate("INSERT INTO likes (userID, quoteID) VALUES ('" + userID + "', '" + quoteID + "')");
+			
+			int currentLikes = 0;
+			ResultSet myResultSet = myStatement.executeQuery("SELECT likes FROM quotes WHERE quoteID = '" + quoteID + "'");
+			if(myResultSet.next()) 
+				currentLikes = myResultSet.getInt("likes");
+			
+			myStatement.executeUpdate("UPDATE quotes SET likes = '" + (currentLikes + 1) + "' WHERE quoteID = '" + quoteID + "'");
 		}
 		catch (Exception e) {
-			System.out.println(e.getMessage());
+			e.printStackTrace();
 		}
 	}
 }

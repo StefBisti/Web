@@ -31,7 +31,7 @@
 		
 		<form autocomplete="off">
 			<div class="fieldTitle">Enter your username</div>
-			<input type="text" maxlength="20" id="username">
+			<input type="text" maxlength="20" id="usernameWR56YyOp0">
 			<p class="fieldError" id="usernameProblem">Username is incorrect.</p>
 			
 			<div class="fieldTitle">Enter your password</div>

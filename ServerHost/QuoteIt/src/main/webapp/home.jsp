@@ -44,11 +44,31 @@
 			<c:if test="${bestQuotes.size() >= 1}">
 				<c:forEach var="i" begin="0" end="${bestQuotes.size() - 1}">			
 					<div class="quote" id="${bestQuotes.get(i).get(0)}"> 
-						<div class="heartHolder" onclick ="ChangeLikeButton(this, 'like')" onmouseenter="ChangeLikeButton(this, 'highlight')" onmouseleave="ChangeLikeButton(this, 'unhighlight')">
-							<img alt="" src="images/heart.png" class="heart">
-							<div class="heartsNumber">${bestQuotes.get(i).get(4)}</div>
-							<div style="width: min(94px, 9.4vw)"></div>
-						</div>
+					
+						<c:set var="contains" value="false" />
+						<c:forEach var="item" items="${likedQuotes}">
+						 	<c:if test="${item eq bestQuotes.get(i).get(0)}">
+						   		<c:set var="contains" value="true" />
+						  	</c:if>
+						</c:forEach>
+					
+			
+						<c:if test="${contains}">
+							<div class="heartHolder liked" onclick ="ChangeLikeButton(this, 'like')" onmouseenter="ChangeLikeButton(this, 'highlight')" onmouseleave="ChangeLikeButton(this, 'unhighlight')">
+								<img alt="" src="images/heart.png" class="heart">
+								<div class="heartsNumber">${bestQuotes.get(i).get(4)}</div>
+								<div style="width: min(94px, 9.4vw)"></div>
+							</div>
+						</c:if>
+						
+						<c:if test="${!contains}">
+							<div class="heartHolder" onclick ="ChangeLikeButton(this, 'like')" onmouseenter="ChangeLikeButton(this, 'highlight')" onmouseleave="ChangeLikeButton(this, 'unhighlight')">
+								<img alt="" src="images/heart.png" class="heart">
+								<div class="heartsNumber">${bestQuotes.get(i).get(4)}</div>
+								<div style="width: min(94px, 9.4vw)"></div>
+							</div>
+						</c:if>
+						
 						<div class="date">${bestQuotes.get(i).get(5)}</div>
 						<div>
 							<div class="quoteText">&bdquo; ${bestQuotes.get(i).get(1)} &rdquo;</div>
@@ -111,7 +131,7 @@
 				<c:if test="${myQuotes.size() >= 1}">
 					<c:forEach var="i" begin="0" end="${myQuotes.size() - 1}">			
 						<div class="quote" id="${myQuotes.get(i).get(0)}"> 
-							<div class="heartHolder">
+						<div class="heartHolder" onclick ="ChangeLikeButton(this, 'like')" onmouseenter="ChangeLikeButton(this, 'highlight')" onmouseleave="ChangeLikeButton(this, 'unhighlight')">
 								<img alt="" src="images/heart.png" class="heart">
 								<div class="heartsNumber">${myQuotes.get(i).get(4)}</div>
 								<div style="width: min(94px, 9.4vw)"></div>
