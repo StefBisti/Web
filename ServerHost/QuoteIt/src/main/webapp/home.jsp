@@ -155,8 +155,6 @@
 				</form>
 				
 				
-				
-				
 				<c:if test="${myQuotes.size() >= 1}">
 					<c:forEach var="i" begin="0" end="${myQuotes.size() - 1}">	
 					
