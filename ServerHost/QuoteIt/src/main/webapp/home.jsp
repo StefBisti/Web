@@ -40,6 +40,10 @@
 			<a class="notSelected" id="typeSelected2" onclick="ChangeTypeSelected(2)">Mine</a>
 			<hr id="quotesTypeLine">
 		</div>
+		
+		
+		<!-- BEST QUOTES -->
+		
 		<div class="quotesHolder" id="BestQuotes">
 			<c:if test="${bestQuotes.size() >= 1}">
 				<c:forEach var="i" begin="0" end="${bestQuotes.size() - 1}">			
@@ -79,16 +83,37 @@
 				</c:forEach>
 			</c:if>
 		</div>
+		
 		<div class="quotesHolder" id="NewQuotes">	
 			<c:if test="${newQuotes.size() >= 1}">
 				<c:forEach var="i" begin="0" end="${newQuotes.size() - 1}">
 				
 					<div class="quote" id="${newQuotes.get(i).get(0)}"> 
-						<div class="heartHolder" onclick ="ChangeLikeButton(this, 'like')" onmouseenter="ChangeLikeButton(this, 'highlight')" onmouseleave="ChangeLikeButton(this, 'unhighlight')">
-							<img alt="" src="images/heart.png" class="heart">
-							<div class="heartsNumber">${newQuotes.get(i).get(4)}</div>
-							<div style="width: min(94px, 9.4vw)"></div>
-						</div>
+					
+						<c:set var="contains" value="false" />
+						<c:forEach var="item" items="${likedQuotes}">
+						 	<c:if test="${item eq newQuotes.get(i).get(0)}">
+						   		<c:set var="contains" value="true" />
+						  	</c:if>
+						</c:forEach>
+					
+			
+						<c:if test="${contains}">
+							<div class="heartHolder liked" onclick ="ChangeLikeButton(this, 'like')" onmouseenter="ChangeLikeButton(this, 'highlight')" onmouseleave="ChangeLikeButton(this, 'unhighlight')">
+								<img alt="" src="images/heart.png" class="heart">
+								<div class="heartsNumber">${newQuotes.get(i).get(4)}</div>
+								<div style="width: min(94px, 9.4vw)"></div>
+							</div>
+						</c:if>
+						
+						<c:if test="${!contains}">
+							<div class="heartHolder" onclick ="ChangeLikeButton(this, 'like')" onmouseenter="ChangeLikeButton(this, 'highlight')" onmouseleave="ChangeLikeButton(this, 'unhighlight')">
+								<img alt="" src="images/heart.png" class="heart">
+								<div class="heartsNumber">${newQuotes.get(i).get(4)}</div>
+								<div style="width: min(94px, 9.4vw)"></div>
+							</div>
+						</c:if>
+						
 						<div class="date">${newQuotes.get(i).get(5)}</div>
 						<div>
 							<div class="quoteText">&bdquo; ${newQuotes.get(i).get(1)} &rdquo;</div>
@@ -113,13 +138,17 @@
 						<div class="heartHolder">
 							<img alt="" src="images/heart.png" class="heart">
 							<div style="width: min(94px, 9.4vw)"></div>
-						</div>
+						</div>						
+						
 						<div class="date">${date}</div>
 						<div>
-							<div class="quoteText" style="display: flex;">&bdquo;<textarea id="quoteInput" class="quoteInput" rows="1"></textarea> <div style="align-self: flex-end">&rdquo;</div></div>
-							<div class="author" style="display: flex;">- <textarea class="authorInput" id="authorInput" rows="1"></textarea></div>
+							<div class="quoteText" style="display: flex;margin-bottom: 0;">&bdquo;<textarea maxlength="500" id="quoteInput" class="quoteInput" rows="1"></textarea> <div style="align-self: flex-end">&rdquo;</div></div>				
+							<div class="numberofCharacters" id="numberofCharacters">0/500</div>	
+							
+							<div class="author" style="display: flex; margin-top: 2px; margin-bottom: 0">- <textarea maxlength="23" class="authorInput" id="authorInput" rows="1"></textarea></div>
+							<div class="note">Note: leave this field empty if you are the author.</div>
 						</div>
-						<div class="postedBy">posted by ${username}</div>
+						<div class="postedBy">posted by &bull; ${username}</div>
 					</div>
 					
 					<button type="button" class="makeQuoteButton" onclick="PostQuote()">Post</button>
@@ -129,19 +158,42 @@
 				
 				
 				<c:if test="${myQuotes.size() >= 1}">
-					<c:forEach var="i" begin="0" end="${myQuotes.size() - 1}">			
-						<div class="quote" id="${myQuotes.get(i).get(0)}"> 
-						<div class="heartHolder" onclick ="ChangeLikeButton(this, 'like')" onmouseenter="ChangeLikeButton(this, 'highlight')" onmouseleave="ChangeLikeButton(this, 'unhighlight')">
-								<img alt="" src="images/heart.png" class="heart">
-								<div class="heartsNumber">${myQuotes.get(i).get(4)}</div>
-								<div style="width: min(94px, 9.4vw)"></div>
-							</div>
+					<c:forEach var="i" begin="0" end="${myQuotes.size() - 1}">	
+					
+							
+						<div class="quote" id="${myQuotes.get(i).get(0)}">
+						 
+							<c:set var="contains" value="false" />
+							<c:forEach var="item" items="${likedQuotes}">
+						 		<c:if test="${item eq myQuotes.get(i).get(0)}">
+						   			<c:set var="contains" value="true" />
+						  		</c:if>
+							</c:forEach>
+					
+			
+							<c:if test="${contains}">
+								<div class="heartHolder liked" onclick ="ChangeLikeButton(this, 'like')" onmouseenter="ChangeLikeButton(this, 'highlight')" onmouseleave="ChangeLikeButton(this, 'unhighlight')">
+									<img alt="" src="images/heart.png" class="heart">
+									<div class="heartsNumber">${myQuotes.get(i).get(4)}</div>
+									<div style="width: min(94px, 9.4vw)"></div>
+								</div>
+							</c:if>
+							
+							<c:if test="${!contains}">
+								<div class="heartHolder" onclick ="ChangeLikeButton(this, 'like')" onmouseenter="ChangeLikeButton(this, 'highlight')" onmouseleave="ChangeLikeButton(this, 'unhighlight')">
+									<img alt="" src="images/heart.png" class="heart">
+									<div class="heartsNumber">${myQuotes.get(i).get(4)}</div>
+									<div style="width: min(94px, 9.4vw)"></div>
+								</div>
+							</c:if>
+							
+							
 							<div class="date">${myQuotes.get(i).get(5)}</div>
 							<div>
 								<div class="quoteText">&bdquo; ${myQuotes.get(i).get(1)} &rdquo;</div>
 								<div class="author">- ${myQuotes.get(i).get(2)}</div>
 							</div>
-							<div class="postedBy">posted by you</div>
+							<div class="postedBy">posted by &bull; ${newQuotes.get(i).get(3)}</div>
 						</div>
 					</c:forEach>
 				</c:if>

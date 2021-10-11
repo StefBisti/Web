@@ -21,6 +21,7 @@ public class CheckPassword_LoginServlet extends HttpServlet {
 		String username = request.getParameter("username");
 		String password = request.getParameter("password");
 		response.setContentType("text/plain");
+		
 		try {
 			Class.forName("com.mysql.cj.jdbc.Driver");
 			Connection myConnection = DriverManager.getConnection("jdbc:mysql://localhost:3306/quoteit", "Stefan", "@T3f!,");
@@ -32,10 +33,10 @@ public class CheckPassword_LoginServlet extends HttpServlet {
 				else
 					response.getWriter().write("Password is not corect");
 			}
-			else {
+			else
 				response.getWriter().write("Username does not exist");
-			}
 		} catch (Exception e) {
+			e.printStackTrace();
 			response.getWriter().write("Something went wrong!");
 		}
 	

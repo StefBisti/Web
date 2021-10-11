@@ -24,13 +24,24 @@ const ChangeTypeSelected = (i) => {
 };
 
 const PostQuote = () => {
-	let quoteText = $('#quoteInput').val();
-	let author = $('#authorInput').val();
+	let quoteText = $('#quoteInput').val().replaceAll("'", "''");
+	let author = $('#authorInput').val().replaceAll("'", "''");
+	
+	if(quoteText.length > 520 || author.length > 25){
+		alert("Please use less single quotes (') ");
+		return;
+	}
+	
 	$.get('PostQuote_HomeServlet', {
 		content: quoteText,
 		author: author
-	}, () => {
-		location.reload();
+	}, (response) => {
+		if(response == "Something went wrong with the SQL!")
+			alert('Something went wrong with the SQL!\nServletName: "PostQuote_HomeServlet"');
+		else if(response == "Something went wrong")
+			alert('Something went wrong with the server!\nServletName: "PostQuote_HomeServlet"');
+		else
+			location.reload();
 	});
 };
 
@@ -44,17 +55,19 @@ const Like = (element) => {
 		obj.children[0].children[1].innerHTML = currentLikes + 1;
 	});
 	
-	
-	
-	
 	$.get('LikeQuote_HomeServlet', {
 		quoteID: quoteID
+	}, (response) => {
+		if(response == "Not logged in"){}
+		else if(response == "Something went wrong with the SQL!")
+			alert('Something went wrong with the SQL!\nServletName: "LikeQuote_HomeServlet"');
+		else if(response == "Something went wrong")
+			alert('Something went wrong with the server!\nServletName: "LikeQuote_HomeServlet"');
 	});
 };
 
 const Unlike = (element) => {
 	let quoteID = element.parentElement.id;
-	
 	
 	$(`[id=${quoteID}]`).each((ind, obj) => {
 		console.log(obj);
@@ -63,16 +76,15 @@ const Unlike = (element) => {
 		obj.children[0].children[1].innerHTML = currentLikes - 1;
 	});
 	
-	
-	
 	$.get('UnlikeQuote_HomeServlet', {
 		quoteID: quoteID
 	}, (response) => {
-		
+		if(response == "Not logged in"){}
+		else if(response == "Something went wrong with the SQL!")
+			alert('Something went wrong with the SQL!\nServletName: "UnlikeQuote_HomeServlet"');
+		else if(response == "Something went wrong!")
+			alert('Something went wrong with the server!\nServletName: "UnlikeQuote_HomeServlet"');
 	});
-	
-	
-	// de pus response
 };
 
 const ChangeLikeButton = (element, query) => {
@@ -97,20 +109,18 @@ const ChangeLikeButton = (element, query) => {
 			}	
 			break;	
 	}
-}
-
+};
 
 
 $(document).ready(() => {
-	if(document.getElementById('quoteInput') != null) {
-		$('#quoteInput').css('height', 'auto');
-		$('#quoteInput').css('height', (document.getElementById('quoteInput').scrollHeight) + 'px');
-	}
-	
 	$('#quoteInput').on('input', () => {
 		if(document.getElementById('quoteInput') != null) {
 			$('#quoteInput').css('height', 'auto');
 			$('#quoteInput').css('height', (document.getElementById('quoteInput').scrollHeight) + 'px');
+			$('div.loginToSeeThis').css('visibility', 'hidden');
+			
+			let noOfChars = $('textarea#quoteInput').val().length;
+			$('#numberofCharacters').text(`${noOfChars}/500`);
 		}
 	});
 });

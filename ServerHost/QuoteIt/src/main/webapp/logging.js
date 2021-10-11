@@ -29,19 +29,17 @@ const Login = () => {
 							window.location.href = 'home';
 						}
 						else
-							alert('something went wrong line 27');
+							alert('Something went wrong with the server!\nServletName: "LoginServlet');
 					});
 				}
 				else if (responseText == 'Password is not corect') {
 					$('#passwordProblem').text(responseText);
 					$('#passwordProblem').css('visibility', 'visible');
 				}
-				else if (responseText == 'Username does not exist'){
-					alert('something went wrong');
-				}
-				else if (responseText == 'Something went wrong!'){
-					alert('something went wrong');
-				}
+				else if (responseText == 'Username does not exist')
+					alert('Something went wrong with the server!\nServletName: "CheckPassword_LoginServlet');
+				else if (responseText == 'Something went wrong!')
+					alert('Something went wrong with the server!\nServletName: "CheckPassword_LoginServlet');
 			});
 		}
 		else if(responseText == 'Username is not corect'){
@@ -52,7 +50,7 @@ const Login = () => {
 		else if(responseText == 'Something went wrong!'){		
 			$('#passwordProblem').css('visibility', 'hidden');
 			$('#usernameProblem').css('visibility', 'hidden');
-			alert('Something went wrong!');
+			alert('Something went wrong with the server!\nServletName: "CheckUsername_LoginServlet');
 		}
 	})
 	
@@ -91,9 +89,8 @@ const Signup = () => {
 				$('#usernameProblem').text(responseText);
 				$('#usernameProblem').css('visibility', 'visible');
 			}
-			else if(responseText == 'Something went wrong'){
-				alert('Something went wrong!');
-			}
+			else if(responseText == 'Something went wrong')
+				alert('Something went wrong with the server!\nServletName: "CheckDuplicateUsername_SignupServlet');
 			else if(responseText == 'Username available'){
 				if(passwordLongEnough){
 					$.get('SignupServlet', {
@@ -103,7 +100,7 @@ const Signup = () => {
 						if(responseText2 == 'All good')
 							window.location.href = 'home';
 						else if(responseText2 == 'Something went wrong')
-							alert('Something went wrong!');
+							alert('Something went wrong with the server!\nServletName: "SignupServlet');
 					});
 				}
 			}

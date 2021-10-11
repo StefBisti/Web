@@ -1,8 +1,10 @@
 package com.QuoteIt;
 
+import java.io.IOException;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
+import java.sql.SQLSyntaxErrorException;
 import java.sql.Statement;
 
 import javax.servlet.annotation.WebServlet;
@@ -16,12 +18,18 @@ public class UnlikeQuote_HomeServlet extends HttpServlet {
 
 	private static final long serialVersionUID = -3171859008700848227L;
 
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) {
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
 		HttpSession session = request.getSession();
+		
+		if(session.getAttribute("userID") == null) {
+			response.getWriter().write("Not logged in");
+			return;
+		}
+		
 		int userID = (int) session.getAttribute("userID");
 		int quoteID = Integer.parseInt(request.getParameter("quoteID"));
 		
-		try {	
+		try {			
 			Class.forName("com.mysql.cj.jdbc.Driver");
 			Connection myConnection = DriverManager.getConnection("jdbc:mysql://localhost:3306/quoteit", "Stefan", "@T3f!,");
 			Statement myStatement = myConnection.createStatement();
@@ -34,8 +42,13 @@ public class UnlikeQuote_HomeServlet extends HttpServlet {
 			
 			myStatement.executeUpdate("UPDATE quotes SET likes = '" + (currentLikes - 1) + "' WHERE quoteID = '" + quoteID + "'");
 		}
+		catch(SQLSyntaxErrorException sqlException) {
+			sqlException.printStackTrace();
+			response.getWriter().write("Something went wrong with the SQL!");
+		}
 		catch (Exception e) {
 			e.printStackTrace();
+			response.getWriter().write("Something went wrong!");
 		}
 	}
 }
