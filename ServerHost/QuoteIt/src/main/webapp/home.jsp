@@ -20,17 +20,21 @@
 <body>
 	<div class="header">
 		<a href="home">Home</a>
-		<a href="profile" id="upperUsername">
+		<div id="upperUsername" onclick="upperUsernameClick()">
 			${username}
 			<c:if test="${userID == undefined}">
 				Log in
 				<script>
-					$("a#upperUsername").css("color", "rgb(0, 128, 255)");
-					$("a#upperUsername").css("font-weight", "500");
-					$("a#upperUsername").attr("href", "login");
+					$("div#upperUsername").css("color", "rgb(0, 128, 255)");
+					$("div#upperUsername").css("font-weight", "500");
+					$("div#upperUsername").attr("onclick", "window.location.href='login';");
 				</script>
 			</c:if>
-		</a>
+		</div>
+		<div class="dropdown" id="topDropdown">
+			<button id="LogInButton" onclick="window.location.href='login';">Log in</button>
+			<button id="LogOutButton" onclick="Logout()">Log out</button>
+		</div>
 	</div>
 	
 	<div class="content">

@@ -18,17 +18,55 @@ div.header {
 	align-items: center;
 	justify-content: space-between;
 }
-div.header a {
+div.header a,  div.header div {
 	text-decoration: none;
-	padding: 0px 5vw;
+	padding: 0px 2vw;
+	margin-left: 3vw;
+	margin-right: 3vw;
 	-webkit-tap-highlight-color:  rgba(255, 255, 255, 0); 
 	font-size: clamp(27px, 4vh, 50px);
 	color: rgb(50, 50, 50);
 	font-weight: 900;
+	user-select: none;
 }
 div.header a:hover {
 	color: rgb(0, 0, 0);
 }
+
+div.header div.dropdown {
+	visibility: hidden;
+	background-color: white;
+	position: absolute;
+	top: clamp(40px, 7vh, 100px);
+	right: 0%;
+	width: 230px;
+	padding: 0;
+	display: flex;
+	flex-direction: column;
+	align-items: stretch;
+	align-content: stretch;
+	box-shadow: 0 10px 10px 2px rgba(0, 0, 0, 0.15);
+}
+div.dropdown button {
+	margin: 0;
+	height: 55px;
+	flex-grow: 4;
+	border: none;
+	outline: none;
+	background-color: rgba(0, 0, 0, 0);
+	font-size: 30px;
+	font-family: 'Roboto', sans-serif;
+	font-weight: 300;
+	text-align: left;
+	padding-left: 20px;
+}
+div.dropdown button#LogInButton:hover {
+	background-color: rgb(102, 204, 0);
+}
+div.dropdown button#LogOutButton:hover {
+	background-color: rgb(230, 46, 0);
+}
+
 
 div.content {
 	display: flex;
@@ -262,4 +300,11 @@ button.makeQuoteButton:hover {
 }
 button.makeQuoteButton:active {
 	background-color: rgb(1, 90, 1);
+}
+
+#upperUsername { 
+	cursor: pointer;
+	height: clamp(40px, 7vh, 100px);
+	display: flex;
+	align-items: center;
 }

@@ -111,6 +111,22 @@ const ChangeLikeButton = (element, query) => {
 	}
 };
 
+const upperUsernameClick = () => {
+	if($('#topDropdown').css('visibility') == 'hidden')
+		$('#topDropdown').css('visibility', 'visible');
+	else
+		$('#topDropdown').css('visibility', 'hidden');
+};
+
+const Logout = () => {
+	$.get('Logout_HomeServlet', (response) => {
+		if(response == 'All good!')
+			location.reload();
+		else
+			alert('Something went wrong with the server!\nServletName: "Logout_HomeServlet"');
+	});
+}
+
 
 $(document).ready(() => {
 	$('#quoteInput').on('input', () => {

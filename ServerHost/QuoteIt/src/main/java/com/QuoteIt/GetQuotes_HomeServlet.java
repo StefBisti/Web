@@ -19,7 +19,9 @@ import javax.servlet.http.HttpSession;
 
 @WebServlet("/GetQuotes_HomeServlet")
 public class GetQuotes_HomeServlet extends HttpServlet{
-	private static final long serialVersionUID = -1213566127786504450L;
+	
+	private static final long serialVersionUID = 8371099260126364750L;
+	
 	public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		HttpSession session = request.getSession();
 		
