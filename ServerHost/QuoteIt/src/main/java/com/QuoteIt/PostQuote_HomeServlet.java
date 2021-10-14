@@ -28,10 +28,7 @@ public class PostQuote_HomeServlet extends HttpServlet{
 		int userID = (int) session.getAttribute("userID");
 		String content = request.getParameter("content");
 		String username = (String) session.getAttribute("username");
-		String author = request.getParameter("author") == null ? request.getParameter("author") : username;
-		
-		
-		System.out.println(author);
+		String author = request.getParameter("author") == "" ? username : request.getParameter("author");
 		
 		Date date = new Date();
 		SimpleDateFormat dateFormat = new SimpleDateFormat("YYYY-MM-dd");

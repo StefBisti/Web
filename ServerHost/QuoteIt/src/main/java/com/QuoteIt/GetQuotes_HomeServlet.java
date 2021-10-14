@@ -39,11 +39,21 @@ public class GetQuotes_HomeServlet extends HttpServlet{
 			likedQuotes = GetLikedQuotes(userID);
 		}
 		
+		if(myQuotes != null) {
+			int totalLikes = 0;
+			for(ArrayList<String> quote : myQuotes) {
+				totalLikes += Integer.parseInt(quote.get(4));
+			}
+			
+			session.setAttribute("numberOfQuotes", myQuotes.size());
+			session.setAttribute("totalLikes", totalLikes);
+		}
+			
 		session.setAttribute("bestQuotes", bestQuotes);
 		session.setAttribute("newQuotes", newQuotes);
 		session.setAttribute("myQuotes", myQuotes);
 		session.setAttribute("likedQuotes", likedQuotes);
-		
+			
 		Date date = new Date();
 		SimpleDateFormat dateFormat = new SimpleDateFormat("dd MMMM Y");
 		session.setAttribute("date", dateFormat.format(date));
@@ -104,7 +114,7 @@ public class GetQuotes_HomeServlet extends HttpServlet{
 			Class.forName("com.mysql.cj.jdbc.Driver");
 			Connection myConnection = DriverManager.getConnection("jdbc:mysql://localhost:3306/quoteit", "Stefan", "@T3f!,");
 			Statement myStatement = myConnection.createStatement();
-			ResultSet myResultSet = myStatement.executeQuery("SELECT * FROM quotes ORDER BY date DESC");
+			ResultSet myResultSet = myStatement.executeQuery("SELECT * FROM quotes ORDER BY date DESC, likes DESC");
 			
 			while(myResultSet.next()) {	
 				ArrayList<String> singleQuote = new ArrayList<String>();

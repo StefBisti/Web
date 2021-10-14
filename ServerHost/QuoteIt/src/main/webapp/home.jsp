@@ -33,7 +33,7 @@
 		</div>
 		<div class="dropdown" id="topDropdown">
 			<button id="LogInButton" onclick="window.location.href='login';">Log in</button>
-			<button id="LogOutButton" onclick="Logout()">Log out</button>
+			<button id="LogOutButton" onclick="Logout()">Sign out</button>
 		</div>
 	</div>
 	
@@ -62,10 +62,12 @@
 					
 			
 						<c:if test="${contains}">
-							<div class="heartHolder liked" onclick ="ChangeLikeButton(this, 'like')" onmouseenter="ChangeLikeButton(this, 'highlight')" onmouseleave="ChangeLikeButton(this, 'unhighlight')">
+							<div class="heartHolder liked" onclick ="ChangeLikeButton(this, 'like');" onmouseenter="ChangeLikeButton(this, 'highlight')" onmouseleave="ChangeLikeButton(this, 'unhighlight')">
+								
 								<img alt="" src="images/heart.png" class="heart">
 								<div class="heartsNumber">${bestQuotes.get(i).get(4)}</div>
-								<div style="width: min(94px, 9.4vw)"></div>
+								<div style="width: min(94px, 9.4vw)"></div>								
+								<div style="positon: absolute; width: 100%; height: 200%; margin-top: -100px"></div>								
 							</div>
 						</c:if>
 						
@@ -74,12 +76,13 @@
 								<img alt="" src="images/heart.png" class="heart">
 								<div class="heartsNumber">${bestQuotes.get(i).get(4)}</div>
 								<div style="width: min(94px, 9.4vw)"></div>
+								<div style="positon: absolute; width: 100%; height: 200%; margin-top: -100px"></div>
 							</div>
 						</c:if>
 						
 						<div class="date">${bestQuotes.get(i).get(5)}</div>
 						<div>
-							<div class="quoteText">&bdquo; ${bestQuotes.get(i).get(1)} &rdquo;</div>
+							<div class="quoteText">&bdquo;${bestQuotes.get(i).get(1)}&rdquo;</div>
 							<div class="author">- ${bestQuotes.get(i).get(2)}</div>
 						</div>
 						<div class="postedBy">posted by &bull; ${bestQuotes.get(i).get(3)}</div>
@@ -107,6 +110,8 @@
 								<img alt="" src="images/heart.png" class="heart">
 								<div class="heartsNumber">${newQuotes.get(i).get(4)}</div>
 								<div style="width: min(94px, 9.4vw)"></div>
+								<div style="positon: absolute; width: 100%; height: 200%; margin-top: -100px"></div>
+								
 							</div>
 						</c:if>
 						
@@ -115,12 +120,13 @@
 								<img alt="" src="images/heart.png" class="heart">
 								<div class="heartsNumber">${newQuotes.get(i).get(4)}</div>
 								<div style="width: min(94px, 9.4vw)"></div>
+								<div style="positon: absolute; width: 100%; height: 200%; margin-top: -100px"></div>
 							</div>
 						</c:if>
 						
 						<div class="date">${newQuotes.get(i).get(5)}</div>
 						<div>
-							<div class="quoteText">&bdquo; ${newQuotes.get(i).get(1)} &rdquo;</div>
+							<div class="quoteText">&bdquo;${newQuotes.get(i).get(1)}&rdquo;</div>
 							<div class="author">- ${newQuotes.get(i).get(2)}</div>
 						</div>
 						<div class="postedBy">posted by &bull; ${newQuotes.get(i).get(3)}</div>
@@ -157,13 +163,17 @@
 					
 					<button type="button" class="makeQuoteButton" onclick="PostQuote()">Post</button>
 				</form>
-				
-				
-				
+
 				<c:if test="${myQuotes.size() >= 1}">
+				
+					<div class="quotesStats">
+						Number of quotes: ${numberOfQuotes} <br>
+						Total likes: ${totalLikes} 
+					</div>
+				
+				
 					<c:forEach var="i" begin="0" end="${myQuotes.size() - 1}">	
 					
-							
 						<div class="quote" id="${myQuotes.get(i).get(0)}">
 						 
 							<c:set var="contains" value="false" />
@@ -179,6 +189,7 @@
 									<img alt="" src="images/heart.png" class="heart">
 									<div class="heartsNumber">${myQuotes.get(i).get(4)}</div>
 									<div style="width: min(94px, 9.4vw)"></div>
+									<div style="positon: absolute; width: 100%; height: 200%; margin-top: -100px"></div>
 								</div>
 							</c:if>
 							
@@ -187,16 +198,17 @@
 									<img alt="" src="images/heart.png" class="heart">
 									<div class="heartsNumber">${myQuotes.get(i).get(4)}</div>
 									<div style="width: min(94px, 9.4vw)"></div>
+									<div style="positon: absolute; width: 100%; height: 200%; margin-top: -100px"></div>
 								</div>
 							</c:if>
 							
 							
 							<div class="date">${myQuotes.get(i).get(5)}</div>
 							<div>
-								<div class="quoteText">&bdquo; ${myQuotes.get(i).get(1)} &rdquo;</div>
+								<div class="quoteText">&bdquo;${myQuotes.get(i).get(1)}&rdquo;</div>
 								<div class="author">- ${myQuotes.get(i).get(2)}</div>
 							</div>
-							<div class="postedBy">posted by &bull; ${newQuotes.get(i).get(3)}</div>
+							<div class="postedBy">posted by &bull; ${myQuotes.get(i).get(3)}</div>
 						</div>
 					</c:forEach>
 				</c:if>

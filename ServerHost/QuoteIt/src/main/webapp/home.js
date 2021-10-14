@@ -49,8 +49,11 @@ const Like = (element) => {
 	let quoteID = element.parentElement.id;
 	
 	$(`[id=${quoteID}]`).each((ind, obj) => {
-		console.log(obj);
-		obj.children[0].classList.add('liked');
+		
+		if(obj.children[0] != element)
+			obj.children[0].classList.add('liked');
+		else
+			console.log(9);
 		let currentLikes = parseInt(obj.children[0].children[1].innerHTML);
 		obj.children[0].children[1].innerHTML = currentLikes + 1;
 	});
@@ -70,7 +73,6 @@ const Unlike = (element) => {
 	let quoteID = element.parentElement.id;
 	
 	$(`[id=${quoteID}]`).each((ind, obj) => {
-		console.log(obj);
 		obj.children[0].classList.remove('liked');
 		let currentLikes = parseInt(obj.children[0].children[1].innerHTML);
 		obj.children[0].children[1].innerHTML = currentLikes - 1;
@@ -99,9 +101,10 @@ const ChangeLikeButton = (element, query) => {
 			break;
 		case 'like':
 			if(!$(element).hasClass('liked')){
-				$(element).addClass('liked');
 				$(element).removeClass('highlighted');
 				Like(element);
+				
+				rippleEffect(element, 4);
 			}
 			else {
 				$(element).removeClass('liked');
@@ -125,6 +128,20 @@ const Logout = () => {
 		else
 			alert('Something went wrong with the server!\nServletName: "Logout_HomeServlet"');
 	});
+}
+
+const rippleEffect = function(element, n) {
+	
+	setTimeout(function() {
+		element.children[3].style.background = `radial-gradient(circle, rgb(224, 13, 13) ${n}%, rgba(255, 255, 255, 0) ${n + 1}%)`;
+		n += 4;
+		if(n < 100)
+			rippleEffect(element, n);
+		else{
+			element.children[3].style.background = ``;
+			element.classList.add('liked');
+		}
+	}, 0.1);
 }
 
 

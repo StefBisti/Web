@@ -106,4 +106,23 @@ const Signup = () => {
 			}
 		});
 	}
-}
+};
+
+const Logout = () => {
+	$.get('Logout_HomeServlet', (response) => {
+		if(response == 'All good!')
+			location.reload();
+		else
+			alert('Something went wrong with the server!\nServletName: "Logout_HomeServlet"');
+	});
+};
+
+const upperUsernameClick = () => {
+	if($('#topDropdown').css('visibility') == 'hidden')
+		$('#topDropdown').css('visibility', 'visible');
+	else
+		$('#topDropdown').css('visibility', 'hidden');
+};
+
+
+
