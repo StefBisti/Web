@@ -5,19 +5,7 @@ ServerHost/.settings/
 .project
 .settings/
 
-Blogs-loginProject/.settings
-Blogs-loginProject/build
-Blogs-loginProject/.classpath
-Blogs-loginProject/.project
-
-LoginSystem/.settings
-LoginSystem/build
-LoginSystem/.classpath
-LoginSystem/.project
-
-QuoteIt/.settings
-QuoteIt/build
-QuoteIt/.classpath
-QuoteIt/.project
-QuoteIt/build/classes
-
+*/.settings
+*/build
+*/.classpath
+*/.project

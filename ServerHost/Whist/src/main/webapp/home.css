@@ -1,0 +1,178 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;500;700;900&display=swap');
+
+body {
+	background-color: rgb(240, 240, 240);
+	margin: auto;
+	font-family: 'Roboto', sans-serif;
+	overflow-x: hidden;
+}
+
+div.header{
+    margin-top: 50px;
+    margin-bottom: 0;
+    width: 100%;
+    text-align: center;
+    font-size: 75px;
+    font-weight: 700;
+    color: rgb(84 84 84);
+}
+hr.header{
+    margin-top: 0px;
+    margin-bottom: 40px;
+    width: 90%;
+    height: 3px;
+    background-color: rgb(41, 41, 41);
+    border: none;
+}
+
+div.content{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+div.hostGameHolder, div.otherGamesHolder {
+    margin-top: 30px;
+    width: 90%;
+    align-self: center;
+    justify-content: flex-start;
+}
+div.hostGameHolder{
+	margin-bottom: 100px;
+}
+div.hostGameHolder > div.title {
+    font-size: clamp(40px, 7vw, 80px);
+	color: rgb(50, 50, 50);
+	font-weight: 300;
+	position: relative;
+    height: fit-content;
+    text-indent: 5px;
+    margin-bottom: 5px;
+}
+
+div.hostGame, div.game{
+    width: 100%;
+    background-color: rgb(255, 255, 255);
+    box-shadow: 0 0 12.5px 0.1px rgba(0, 0, 0, 0.1);
+    border-radius: 20px;
+    height: clamp(160px, 20vw, 240px);
+    align-items: center;
+    display: flex;
+    flex-direction: row;
+}
+div.hostGame > div > div.players {
+    font-size: clamp(20px, 4vw, 60px);
+	color: rgb(50, 50, 50);
+	font-weight: 500;
+	position: relative;
+    margin-top: -15px;
+    margin-bottom: 10px;
+    margin-left: 40px;
+}
+div.hostGame > div > input.players {
+    position: relative;
+    margin-left: 40px;
+    height: clamp(35px, 5.5vw, 75px);
+    color: rgb(50, 50, 50);
+    font-weight: 500;
+    font-size: clamp(20px, 4vw, 60px);
+    width: 70%;
+}
+div.hostGame > button.start {
+    border: none;
+    margin-left: auto;
+    position: relative;
+    align-self: flex-end;
+    background-color: rgb(7, 160, 7);
+    height: clamp(160px, 20vw, 240px);
+    width: 75px;
+    color: whitesmoke;
+    border-top-right-radius: 10px;
+    border-bottom-right-radius: 10px;
+}
+
+div.hostGame > button.start:hover {
+    background-color: rgb(7, 150, 7);
+}
+div.hostGame > button.start:active {
+    background-color: rgb(7, 121, 7);
+}
+div.hostGame > button.start > span {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    font-size: clamp(50px, 7vw, 70px);
+    font-weight: 900;
+}
+
+
+div.game {
+    flex-direction: column;
+    justify-content: center;
+    height: fit-content;
+    margin-bottom: 30px;
+}
+div.game > div{
+    width: 100%;
+}
+div.game > div {
+    color: rgb(49, 49, 49);
+    font-weight: 500;
+}
+div.game > div > span.textHeader {
+    color: rgb(19, 19, 19);
+    font-weight: 900;
+}
+div.game > div.date{
+    text-align: right;
+    margin-top: 15px;
+    margin-right: 50px;
+	margin-bottom: 20px;
+    font-size: clamp(20px, 2.5vw, 30px);
+    color: rgb(110, 110, 110);
+}
+div.game > div.players{
+    text-align: left;
+    margin-top: 5px;
+    margin-left: 5%;
+    margin-right: 5%;
+    width: 90%;
+    font-size: clamp(25px, 2vw, 40px);
+}
+div.game > div.winner{
+    text-align: left;
+    margin-top: 5px;
+   	margin-left: 5%;
+    margin-right: 5%;
+    width: 90%;
+    font-size: clamp(25px, 2vw, 40px);
+}
+div.game > div.bestScore{
+    text-align: left;
+    margin-top: 25px;
+    margin-left: 5%;
+    margin-right: 5%;
+    width: 90%;
+    font-size: clamp(20px, 1.6vw, 35px);
+}
+div.game > button.showGame{
+    margin-bottom: 15px;
+    margin-top: 15px;
+    align-self: flex-end;
+    margin-right: 15px;
+    border: none;
+    background-color: rgb(7, 160, 7);
+    color: whitesmoke;
+    padding: 10px 30px;
+    border-radius: 10px;
+    font-size: 35px;
+    font-weight: 700;
+}
+div.game > button.showGame:hover {
+    background-color: rgb(7, 150, 7);
+}
+div.game > button.showGame:active {
+    background-color: rgb(7, 121, 7);
+}
