@@ -13,7 +13,8 @@
 	<title>Whist</title>
 	
 </head>
-<body id="${gameID}" style="display: flex; flex-direction: column;">
+<body id="${gameID}" style="display: flex; flex-direction: column; left: 50%; transform: translate(0, 0)">
+	
 	
 	<div style="display: flex; flex-direction: row; margin-bottom: 70px; justify-content: space-around; <c:if test="${gameData.getNames().size() > 2}">width: ${130 + 250 * gameData.getNames().size() + 200}px;</c:if>">
 		<button class="headerButton" onclick="ToHome()" style="margin-right: 100px">&#8592; Home</button>
@@ -138,6 +139,7 @@
 	
 	<c:forEach var="hostedGameID" items="${hostedGamesIDs}">
 		<c:if test="${hostedGameID eq fn:replace(gameID, 'game', '')}">
+			<div style="display: flex; justify-content: center; <c:if test="${gameData.getNames().size() > 2}">width: ${130 + 250 * gameData.getNames().size() + 200}px;</c:if>">
 			<form id="insertValuesForm" onsubmit="return false" class="insertValues" style="<c:if test='${gameData.getNames().size() <= 3}'>margin-left:0px</c:if>;width: max(${(gameData.getNames().size() - 1) * 200}px, 700px)">
 				Bets: 
 				<c:forEach var="j" begin="0" end="${gameData.getNames().size() - 1}">
@@ -153,6 +155,7 @@
 				
 				<span class="submitRowProblem">The bets are incorrect</span>
 			</form>
+			</div>
 		</c:if>
 	</c:forEach>
 	
