@@ -23,7 +23,7 @@ import javax.servlet.http.HttpSession;
 public class CreateGame_HomeServlet extends HttpServlet{
 	
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		
+		System.out.println(0);
 		String playersString = req.getParameter("players");
 		
 		Date date = new Date();

@@ -3,7 +3,7 @@
 <%@ page import="com.Whist.Game" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
-<%@ taglib uri = "http://java.sun.com/jsp/jstl/functions" prefix = "fn" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix = "fn" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -22,7 +22,7 @@
 	</div>
 	
 	<c:if test="${gameData == null}">
-		<div style="font-size: 5vw; position: absolute; top: 50%; width: 100%; text-align: center">Game not found</div>
+		<div style="font-size: 5vw; width: 100%; margin: 0; text-align: center">Game not found</div>
 	</c:if>
 	
 	<c:if test="${gameData != null}">
@@ -92,6 +92,9 @@
 			            	<td style="
 			            			<c:if test="${fn:substring(gameData.getScores().get(i).get(j), 0, 1) == '+'}">color: rgb(14 184 14);</c:if>
 			            			<c:if test="${fn:substring(gameData.getScores().get(i).get(j), 0, 1) == '-'}">color: rgb(215 4 4);</c:if>
+			            			
+			            			<fmt:parseNumber var="parsedScore" type="number" value="${fn:substring(gameData.getScores().get(i).get(j), 1, fn:length(gameData.getScores().get(i).get(j)))}"/>
+			            			<c:if test="${parsedScore >= 15}">color: rgb(13 115 216);</c:if>
 			            			">${gameData.getScores().get(i).get(j)}</td>
 			            </c:if>
 			            
@@ -99,6 +102,9 @@
 			            	<td style="
 			            			<c:if test="${fn:substring(gameData.getScores().get(i).get(j), 0, 1) == '+'}">color: rgb(14 184 14);</c:if>
 			            			<c:if test="${fn:substring(gameData.getScores().get(i).get(j), 0, 1) == '-'}">color: rgb(215 4 4);</c:if>
+			            			
+			            			<fmt:parseNumber var="parsedScore" type="number" value="${fn:substring(gameData.getScores().get(i).get(j), 1, fn:length(gameData.getScores().get(i).get(j)))}"/>
+			            			<c:if test="${parsedScore >= 15}">color: rgb(13 115 216); font-weigth: 900;</c:if>
 			            			border-right: 2px solid black">${gameData.getScores().get(i).get(j)}</td>
 			            </c:if>
 			            

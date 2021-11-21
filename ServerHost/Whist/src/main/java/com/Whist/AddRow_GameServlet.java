@@ -14,11 +14,16 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+
+import com.mysql.cj.conf.ConnectionUrlParser.Pair;
 
 @WebServlet("/AddRow_GameServlet")
 public class AddRow_GameServlet extends HttpServlet{
 
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		HttpSession session = req.getSession();
+		
 		String betsString = req.getParameter("betsString");
 		String handsString = req.getParameter("handsString");
 		int numberOfPlayers = Integer.parseInt(req.getParameter("numberOfPlayers"));
@@ -40,7 +45,7 @@ public class AddRow_GameServlet extends HttpServlet{
 			error = "Bets are incorrect";
 
 		if(error == "") {
-			String scores = getScores(bets, hands);
+			String scores = getScores(bets, hands, session);
 			
 			int roundNumber = postRow(gameID, betsString, handsString, scores);
 			
@@ -88,13 +93,21 @@ public class AddRow_GameServlet extends HttpServlet{
 		return true;
 	}
 	
-	static String getScores(ArrayList<Integer> bets, ArrayList<Integer> hands) {
+	static String getScores(ArrayList<Integer> bets, ArrayList<Integer> hands, HttpSession session) {
 		
 		String result = "";
 		
+		ArrayList<Integer> frequencyArray = (ArrayList<Integer>) session.getAttribute("frequencyArray");
+		System.out.println(frequencyArray);
+		
 		for(int i = 0; i < bets.size(); i++) {
+			
+			int extraScore = 0;
+			if(frequencyArray != null)
+				extraScore = frequencyArray.get(i) > 3    ? 10 : 0;
+			
 			if(bets.get(i) == hands.get(i)) 
-				result += "+" + String.valueOf(5 + bets.get(i));
+				result += "+" + String.valueOf(5 + bets.get(i) + extraScore);
 			else
 				result += "-" + String.valueOf(Math.abs(bets.get(i) - hands.get(i)));
 		}

@@ -8,6 +8,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -15,6 +16,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import javax.websocket.Session;
 
 import com.mysql.cj.conf.ConnectionUrlParser.Pair;
 
@@ -28,6 +30,7 @@ public class GetGameData_GameServlet extends HttpServlet {
 		Game gameData = null;
 	
 		Connection myConnection = null;
+		HttpSession session = req.getSession();
 		
 		try {
 			Class.forName("com.mysql.cj.jdbc.Driver");
@@ -35,7 +38,7 @@ public class GetGameData_GameServlet extends HttpServlet {
 			Statement myStatement = myConnection.createStatement();
 			
 			ArrayList<String> names = getNames(myStatement, gameID);
-			Pair<ArrayList<ArrayList<String>>, ArrayList<Integer>> pair = getScores(myStatement, names.size(), gameID);
+			Pair<ArrayList<ArrayList<String>>, ArrayList<Integer>> pair = getScores(myStatement, names.size(), gameID, session);
 
 			gameData = new Game(names, getBets(myStatement, names.size(), gameID), getHands(myStatement, names.size(), gameID), pair.left, pair.right, getWinner(myStatement, gameID), getWinnerScore(myStatement, gameID));
 				
@@ -49,7 +52,7 @@ public class GetGameData_GameServlet extends HttpServlet {
 		    try { myConnection.close(); } catch (SQLException e) { e.printStackTrace(); }
 		}
 		
-		HttpSession session = req.getSession();
+		
 		session.setAttribute("gameData", gameData);
 		session.setAttribute("gameID", gameID);
 	}
@@ -98,7 +101,7 @@ public class GetGameData_GameServlet extends HttpServlet {
 		return hands;
 	}
 	
-	static Pair<ArrayList<ArrayList<String>>, ArrayList<Integer>> getScores(Statement myStatement, int playersNumber, String gameID) throws SQLException {
+	static Pair<ArrayList<ArrayList<String>>, ArrayList<Integer>> getScores(Statement myStatement, int playersNumber, String gameID, HttpSession session) throws SQLException {
 		ArrayList<ArrayList<String>> scores = new ArrayList<ArrayList<String>>();
 		ResultSet myResultSet = myStatement.executeQuery("SELECT points FROM " + gameID);
 		
@@ -111,20 +114,39 @@ public class GetGameData_GameServlet extends HttpServlet {
 			
 			
 			ArrayList<String> subPoint = new ArrayList<String>();
-			for(int i = 0; i < playersNumber * 2; i += 2) {
+			int arrayIndex = 0;
+			for(int i = 0; i < playersNumber; i++) {
 				
-				String point = Character.toString(pointsString.charAt(i)) + Character.toString(pointsString.charAt(i + 1));
+				String point = Character.toString(pointsString.charAt(arrayIndex)) + Character.toString(pointsString.charAt(arrayIndex + 1));
 				
-				if(i < pointsString.length() - 2 && !Character.toString(pointsString.charAt(i + 2)).equals("+") && !Character.toString(pointsString.charAt(i + 2)).equals("-")){
-					point += Character.toString(pointsString.charAt(i + 2));
-					i++;
+				if(arrayIndex < pointsString.length() - 2 && !Character.toString(pointsString.charAt(arrayIndex + 2)).equals("+") && !Character.toString(pointsString.charAt(arrayIndex + 2)).equals("-")){
+					point += Character.toString(pointsString.charAt(arrayIndex + 2));
+					arrayIndex++;
 				}
 			
 				subPoint.add(point);	
-				totalScores.set(i/2, totalScores.get(i/2) + Integer.parseInt(Character.toString(pointsString.charAt(i)) + Character.toString(pointsString.charAt(i + 1))));
+				totalScores.set(i, totalScores.get(i) + Integer.parseInt(point));
+				
+				arrayIndex += 2;
+				
 			}
 			scores.add(subPoint);
 		}
+		
+		
+		ArrayList<Integer> frequencyArray = new ArrayList<Integer>();  // premiere
+		System.out.println(scores);
+		for(int i = 0; i < playersNumber; i++) {
+			frequencyArray.add(0);
+			for(int j = playersNumber; j < Math.min(playersNumber * 2 + 12 - 1, scores.size()); j++) { //if(j > playersNumber && j < 2 * playersNumber + 12)
+				if(scores.get(j).get(i).charAt(0) == '+' && Integer.parseInt(scores.get(j).get(i)) < 14)
+					frequencyArray.set(i, frequencyArray.get(i) + 1);
+				else
+					frequencyArray.set(i, 0);
+			}
+		}		
+		session.setAttribute("frequencyArray", frequencyArray);
+
 		return new Pair<ArrayList<ArrayList<String>>, ArrayList<Integer>>(scores, totalScores);
 	}	
 	

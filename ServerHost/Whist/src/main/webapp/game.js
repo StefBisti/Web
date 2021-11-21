@@ -72,6 +72,7 @@ const InsertValues = (numberOfPlayers, round) => {
 			console.log(JSON.parse(response).gameEnded)
 			if(JSON.parse(response).gameEnded)
 				EndGame(gameID);
+			Reload();
 		}
 	});
 }
@@ -118,10 +119,15 @@ const UpdateTableRow = (rowNumber, data) => {
 				
 			else if(i % 3 == 0){
 				obj.innerHTML = data[2][Math.floor(i / 3) - 1];
-				if(data[2][Math.floor(i / 3) - 1].substring(0, 1) === '+')
-					obj.style.color = "rgb(14 184 14)";
+				if(data[2][Math.floor(i / 3) - 1].substring(0, 1) === '+'){
+					obj.style.color = 'rgb(14 184 14)';
+					if(parseInt(data[2][Math.floor(i / 3) - 1]) >= 15)
+						obj.style.color = 'rgb(13 115 216)';
+					console.log(parseInt(data[2][Math.floor(i / 3) - 1]));
+				}
+					
 				else if(data[2][Math.floor(i / 3) - 1].substring(0, 1) === '-') 
-					obj.style.color = "rgb(215 4 4)";
+					obj.style.color = 'rgb(215 4 4)';
 					
 				totalScores.push(parseInt(data[2][Math.floor(i / 3) - 1]));	
 			}		
