@@ -135,10 +135,9 @@ public class GetGameData_GameServlet extends HttpServlet {
 		
 		
 		ArrayList<Integer> frequencyArray = new ArrayList<Integer>();  // premiere
-		System.out.println(scores);
 		for(int i = 0; i < playersNumber; i++) {
 			frequencyArray.add(0);
-			for(int j = playersNumber; j < Math.min(playersNumber * 2 + 12 - 1, scores.size()); j++) { //if(j > playersNumber && j < 2 * playersNumber + 12)
+			for(int j = playersNumber; j < Math.min(playersNumber * 2 + 12 - 1, scores.size()); j++) {
 				if(scores.get(j).get(i).charAt(0) == '+' && Integer.parseInt(scores.get(j).get(i)) < 14)
 					frequencyArray.set(i, frequencyArray.get(i) + 1);
 				else

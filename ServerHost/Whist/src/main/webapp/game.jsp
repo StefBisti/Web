@@ -10,6 +10,7 @@
 	<script src="http://code.jquery.com/jquery-latest.min.js"></script>
  	<script type="text/javascript" src="game.js"></script>
  	<link rel="stylesheet" type="text/css" href="game.css">
+ 	<meta name="viewport" content="minimum-scale=0.1, maximum-scale=1">
 	<title>Whist</title>
 	
 </head>

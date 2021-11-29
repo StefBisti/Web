@@ -49,7 +49,7 @@ public class AddRow_GameServlet extends HttpServlet{
 			
 			int roundNumber = postRow(gameID, betsString, handsString, scores);
 			
-			boolean gameEnded = roundNumber >= 3 * numberOfPlayers + 12;
+			boolean gameEnded = roundNumber >= 3 * numberOfPlayers + 12 - 1;
 			
 			String jsonString = "{\"gameID\":\"" + gameID 
 							+ "\",\"betsString\":\"" + betsString
